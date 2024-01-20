@@ -1,24 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import Display from "./Display";
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+} from "react-router-dom/cjs/react-router-dom.min";
+import { useState } from "react";
+import ButtonPanel from "./ButtonPanel";
 
 function App() {
+  const [state, setState] = useState({
+    Total: null,
+    next: null,
+    operation: null,
+  });
+
+  const handleClick = (buttonName) => {
+    console.log(buttonName + " from app.js");
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className="App">
+        <Display value={state.next || state.Total || "0"} />
+        <ButtonPanel clickHandler={handleClick} />
+      </div>
+    </Router>
   );
 }
 
